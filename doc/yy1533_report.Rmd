@@ -1,0 +1,21 @@
+---
+title: 'Final Project of CS-GY 6923: Machine Learning, Fall 2015'
+author: "Yun Yan (yy1533@nyu.edu)"
+date: "Nov 30, 2015"
+output: html_document
+---
+
+```{r, echo=FALSE, cache=FALSE, include=FALSE}
+require(DiagrammeR)
+```
+
+# Introduction
+In order to predict the labels for test dataset, I have apply xxxxx algorithms. 
+
+ROC to evalucate performance and behaviors of each algorithm.
+
+Choose the best one which is xxxx. 
+
+# Pipeline
+
+

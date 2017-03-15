@@ -1,0 +1,84 @@
+digraph pipeline {
+  graph [rankdir = TB]; 
+  graph [compound = true, nodesep = 0.3, ranksep = 1, color = red]
+  
+  edge [color = dimgray, arrowhead = none, arrowtail = none]; 
+  
+  # Nodes on main pipeline
+  node [shape = box, 
+        color = grey,
+        style = filled,
+        fillcolor = bisque, 
+        fixedsize = true, 
+        width = 2
+        ]
+  imprt [label = '1. Import Data', fillcolor = orange]
+  explr [label = '2. Exploration', fillcolor = limegreen]
+  model [label = '3. Modeling', fillcolor = deepskyblue]
+  dploy [label = '4. Deploy', fillcolor = hotpink]
+   
+  
+  # import data
+  #subgraph step1 {
+    node [fixedsize = true, width = 1]
+    '@@1-1'; '@@1-2'
+  #}
+  imprt -> explr -> model -> dploy [arrowhead = vee, color = black]
+  imprt -> '@@1-1'
+  imprt -> '@@1-2'
+  imprt -> '@@1-3' 
+  imprt -> '@@1-4'
+  
+  # exploration
+  subgraph step2 {
+    node [fixedsize = true, width = 1, fillcolor = lightgreen]
+    '@@2-1' ; '@@2-2'
+  }
+  subgraph step2_sub1 {
+    node [fixedsize = true, width = 1, fillcolor = lightgreen]
+    '@@2-3' ; '@@2-4'
+  }
+  subgraph step2_sub2 {
+    node [fixedsize = true, width = 1, fillcolor = lightgreen]
+    '@@2-5'
+  }
+  explr -> '@@2-1'; 
+  '@@2-1' -> '@@2-3'; 
+  '@@2-1' -> '@@2-4'; 
+  explr -> '@@2-2'
+  '@@2-2' -> '@@2-5'
+  # modeling
+  subgraph step3 {
+    #node []  
+    '@@3-1' [fixedsize = true, width = 1, fillcolor = lightblue]
+    '@@3-2' [fixedsize = true, width = 1, fillcolor = dodgerblue]
+  }
+  subgraph step3_sub1 {
+    node [fixedsize = true, width = 1, fillcolor = lightblue] 
+    '@@3-3' ; '@@3-4' ; 
+    #'@@3-5' [shape=none]; 
+    '@@3-4' ;'@@3-5';
+    '@@3-6' ; '@@3-7'; '@@3-8'; 
+  }
+  subgraph step3_sub2 {
+    node [fixedsize = true, width = 1, fillcolor = dodgerblue] 
+     '@@3-9'
+  }
+  model -> '@@3-1'
+  model -> '@@3-2'
+  '@@3-1' -> '@@3-3'
+  '@@3-1' -> '@@3-4'
+  '@@3-1' -> '@@3-5'
+  '@@3-1' -> '@@3-6'
+  '@@3-1' -> '@@3-7'
+  '@@3-1' -> '@@3-8'
+  '@@3-2' -> '@@3-9'
+
+
+  
+  
+}
+
+[1]: paste0('1-', 1:4, '\n', c(' Data type', ' N/A', ' Duplicate', ' Balanced'))
+[2]: c(paste0('2-', 1:2, '\n', c(' Visualize Pattern', ' Data Distribution')), c('t-SNE', 'PCA', 'Violin Plot'))
+[3]: c(paste0('3-', 1:2, '\n',  c(' Single Model', ' Ensembled Model')), c('Logistics', 'LDA', 'RF', 'CART', 'SVM', 'Neural Network'), c('Blending'))

@@ -1,0 +1,122 @@
+\documentclass{tufte-handout}
+
+%\title{An Example of the Usage of the Tufte-Handout Style\thanks{Inspired by Edward~R. Tufte!}}
+\title{Two-Class Classification Task\thanks{CS-GY-6923\newline Course Instructor: Gang Li;\newline TA: Xu Zhao}}
+%\author[The Tufte-LaTeX Developers]{The Tufte-\LaTeX\ Developers}
+\author[Yun Yan]{Yun Yan (\href{mailto:yy1533@nyu.edu}{yy1533@nyu.edu})}
+%\date{Oct 20, 2015} % without \date command, current date is supplied
+
+%\geometry{showframe} % display margins for debugging page layout
+
+\usepackage{graphicx} % allow embedded images
+  \setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio}
+  \graphicspath{{/Users/yunyan/Yun_Codes/Git_Public_Pres_and_Blog/ML_course_Project/fig/}} % set of paths to search for images
+\usepackage{amsmath}  % extended mathematics
+\usepackage{booktabs} % book-quality tables
+\usepackage{units}    % non-stacked fractions and better unit spacing
+\usepackage{multicol} % multiple column layout facilities
+\usepackage{lipsum}   % filler text
+\usepackage{fancyvrb} % extended verbatim environments
+  \fvset{fontsize=\normalsize}% default font size for fancy-verbatim environments
+
+% Standardize command font styles and environments
+\newcommand{\doccmd}[1]{\texttt{\textbackslash#1}}% command name -- adds backslash automatically
+\newcommand{\docopt}[1]{\ensuremath{\langle}\textrm{\textit{#1}}\ensuremath{\rangle}}% optional command argument
+\newcommand{\docarg}[1]{\textrm{\textit{#1}}}% (required) command argument
+\newcommand{\docenv}[1]{\textsf{#1}}% environment name
+\newcommand{\docpkg}[1]{\texttt{#1}}% package name
+\newcommand{\doccls}[1]{\texttt{#1}}% document class name
+\newcommand{\docclsopt}[1]{\texttt{#1}}% document class option name
+\newenvironment{docspec}{\begin{quote}\noindent}{\end{quote}}% command specification environment
+
+\usepackage{amsmath}
+\usepackage{cancel}
+\usepackage{amsthm}
+\usepackage{bm}
+\usepackage{amssymb}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\newcommand{\bigO}[1]{\ensuremath{\mathcal{O}\left(#1\right)}}
+\newcommand{\bigT}[1]{\ensuremath{\Theta\left(#1\right)}}
+\newcommand{\inv}{^{\raisebox{.2ex}{$\scriptscriptstyle-1$}}}
+
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\fancyhf{}
+\rhead{Page \thepage \hspace{1pt} of \pageref{LastPage}}
+%\makeatletter
+%\renewcommand{\@oddfoot}{\hfil \thepage/\pageref{LastPage} \hfil}
+%\makeatother
+
+\geometry{
+	letterpaper,
+	left = 0.5in, 
+	marginparsep=2pc,
+	marginparwidth = 17pc
+%	marginparwidth=20pc
+	}
+%\geometry{
+%  letterpaper, 
+%  left=1in, % left margin
+%  textwidth=25pc, % main text block
+%  marginparsep=2pc, % gutter between main text block and margin notes
+%  marginparwidth=12pc % width of margin notes
+%}
+%\usepackage[usenames, dvipsnames]{color}
+\usepackage{xcolor}
+\usepackage{color}
+\setcounter{secnumdepth}{3}
+\titleformat{\section}%
+  {\normalfont\Large\itshape\color{Orange}}% format applied to label+text
+  {\llap{\colorbox{Orange}{\parbox{1.5cm}{\hfill\color{white}\thesection}}}}% label
+  {1em}% horizontal separation between label and title body
+  {}% before the title body
+  []% after the title body
+\titleformat{\subsection}%
+  {\normalfont\itshape\color{BurntOrange}}% format applied to label+text
+  {\llap{\colorbox{BurntOrange}{\color{white}\thesubsection}}}% label
+  {1em}% horizontal separation between label and title body
+  {}% before the title body
+  []% after the title body
+
+\usepackage{array}
+\newcommand{\PreserveBackslash}[1]{\let\temp=\\#1\let\\=\temp}
+\newcolumntype{C}[1]{>{\PreserveBackslash\centering}p{#1}}
+\newcolumntype{R}[1]{>{\PreserveBackslash\raggedleft}p{#1}}
+\newcolumntype{L}[1]{>{\PreserveBackslash\raggedright}p{#1}}
+%\usepackage[style=numbering,natbib=true,backend=biber]{biblatex}
+\usepackage{listings}
+\lstset{ %
+  language=R,                     % the language of the code
+  basicstyle=\footnotesize\ttfamily,breaklines=true,
+        % the size of the fonts that are used for the code
+  numbers=left,                   % where to put the line-numbers
+  numberstyle=\tiny\color{gray},  % the style that is used for the line-numbers
+  stepnumber=1,                   % the step between two line-numbers. If it's 1, each line
+                                  % will be numbered
+  numbersep=5pt,                  % how far the line-numbers are from the code
+  backgroundcolor=\color{white},  % choose the background color. You must add \usepackage{color}
+  showspaces=false,               % show spaces adding particular underscores
+  showstringspaces=false,         % underline spaces within strings
+  showtabs=false,                 % show tabs within strings adding particular underscores
+  frame=single,                   % adds a frame around the code
+  rulecolor=\color{black},        % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. commens (green here))
+  tabsize=2,                      % sets default tabsize to 2 spaces
+  captionpos=b,                   % sets the caption-position to bottom
+  breaklines=true,                % sets automatic line breaking
+  breakatwhitespace=false,        % sets if automatic breaks should only happen at whitespace
+  title=\lstname,                 % show the filename of files included with \lstinputlisting;
+                                  % also try caption instead of title
+  keywordstyle=\color{blue},      % keyword style
+  commentstyle=\color{gray},   % comment style
+  stringstyle=\color{red},      % string literal style
+  escapeinside={\%*}{*)},         % if you want to add a comment within your code
+  morekeywords={*,...}            % if you want to add more keywords to the set
+} 
+
+\usepackage[inline]{enumitem}
+\usepackage{tocloft}
+%\renewcommand{\cftsecfont}{\small}
+%\renewcommand{\cftsecpagefont}{\small}
+\renewcommand{\cftsubsecfont}{\small}
+\renewcommand{\cftsubsecpagefont}{\small}
