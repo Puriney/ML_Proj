@@ -57,8 +57,7 @@ t-SNE plot suggest that two classes are possibly separable.
 
 # Model Performance
 
-![Imgur](http://i.imgur.com/Vs5EYZ4.png)
-![Imgur](http://i.imgur.com/hhBuYHk.png)
+![Imgur](http://i.imgur.com/0gDiXzZ.png)
 
 ---
 
