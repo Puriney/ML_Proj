@@ -55,6 +55,34 @@ t-SNE plot suggest that two classes are possibly separable.
 
 # Model Tuning using `caret` package
 
+Package `caret` provides a seamless pipeline for performing preprocessing, training (with CV supported), explicit parameter tuning all at one.
+
+The <kbd>src</kbd> folder lists all the models used in this project. For example, the random forest model in <kbd>model_rf.R</kbd>:
+
+``` r
+# Training scheme: 10-fold Cross Validation for 5 repeated times
+# with ROSE sampling to combat data imbalance
+trCtrolRepCV <- trainControl(method = 'repeatedcv', number = 10,
+                             repeats = 5,
+                             sampling = 'rose',
+                             classProbs = TRUE,
+                             summaryFunction = twoClassSummary)
+# Parameter settings to be explicit tuned
+rfGrid <- expand.grid(mtry = c(5, 25, 55))
+
+# Perform actual training
+mdl_rf <- train(Label ~ .,
+                data = train_df,
+                method = "rf",                     # "rf" = random forest
+                trControl = trCtrolRepCV,          # training control
+                preProcess = c('center', 'scale'), # preprocessing
+                tuneGrid = rfGrid,                 # tuning parameter
+                metric = "ROC",
+                verbose = TRUE)
+```
+
+The rest model trainings follow the same syntax.
+
 # Model Performance
 
 ![Imgur](http://i.imgur.com/0gDiXzZ.png)
@@ -62,3 +90,10 @@ t-SNE plot suggest that two classes are possibly separable.
 ---
 
 # How to Enhance if possible?
+
+- Change training metric to Kappa index, rather than ROC. My final model can achieve AUC=0.99, so I cannot help wondering what is the most possible reason to make this god-almost-alike classifier?
+- My model is working pretty well, so what if my model fails, do I have any other strategies to use? Since feature selection is not still much involved, I would think about creating dummy variables for binary features, investigate feature importance to select features, etc.
+
+
+
+
