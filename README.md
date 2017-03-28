@@ -91,7 +91,7 @@ The rest model trainings follow the same syntax.
 
 # How to Enhance if possible?
 
-- Change training metric to Kappa index, rather than ROC. My final model can achieve AUC=0.99, so I cannot help wondering what is the most possible reason to make this god-almost-alike classifier?
+- Change training metric to Kappa index, rather than ROC. My final ensemble model can achieve AUC=0.99, so I cannot help wondering what is the most possible reason to make this god-almost-alike classifier?
 - My model is working pretty well, so what if my model fails, do I have any other strategies to use? Since feature selection is not still much involved, I would think about creating dummy variables for binary features, investigate feature importance to select features, etc.
 
 
